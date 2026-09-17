@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Toss Ledger, IPL 2008-2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1F2EA;
+    --surface: #FBFBF6;
+    --ink: #1B241E;
+    --muted: #5B685F;
+    --line: #D8D9CC;
+    --teal: #1F6F5C;
+    --teal-soft: rgba(31,111,92,0.12);
+    --amber: #A9701F;
+    --amber-soft: rgba(169,112,31,0.14);
+    --slate: #56727F;
+    --slate-soft: rgba(86,114,127,0.12);
+    --row-alt: rgba(0,0,0,0.02);
+    --focus: #1F6F5C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12160F;
+      --surface: #181D16;
+      --ink: #E9E7DC;
+      --muted: #9AA79A;
+      --line: #2B3128;
+      --teal: #57C4A2;
+      --teal-soft: rgba(87,196,162,0.14);
+      --amber: #E0A94C;
+      --amber-soft: rgba(224,169,76,0.16);
+      --slate: #8FB0C0;
+      --slate-soft: rgba(143,176,192,0.14);
+      --row-alt: rgba(255,255,255,0.035);
+      --focus: #57C4A2;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12160F;
+    --surface: #181D16;
+    --ink: #E9E7DC;
+    --muted: #9AA79A;
+    --line: #2B3128;
+    --teal: #57C4A2;
+    --teal-soft: rgba(87,196,162,0.14);
+    --amber: #E0A94C;
+    --amber-soft: rgba(224,169,76,0.16);
+    --slate: #8FB0C0;
+    --slate-soft: rgba(143,176,192,0.14);
+    --row-alt: rgba(255,255,255,0.035);
+    --focus: #57C4A2;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--teal-soft); }
+  a { color: var(--teal); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .kicker {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: clamp(28px, 4.4vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 16ch;
+  }
+  .dek {
+    color: var(--muted);
+    max-width: 62ch;
+    margin: 0 0 40px;
+    font-size: 14.5px;
+  }
+  .dek b { color: var(--ink); font-weight: 600; }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .hero-stat {
+    padding: 22px 20px;
+  }
+  .hero-stat + .hero-stat { border-left: 1px solid var(--line); }
+  .hero-num {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(34px, 6vw, 52px);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .hero-num.teal { color: var(--teal); }
+  .hero-num.slate { color: var(--slate); }
+  .hero-label { font-size: 13px; color: var(--ink); margin-bottom: 4px; }
+  .hero-sub { font-size: 12.5px; color: var(--muted); }
+  .hero-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .hero-tag.flat { background: var(--slate-soft); color: var(--slate); }
+  .hero-tag.real { background: var(--teal-soft); color: var(--teal); }
+
+  section { margin-bottom: 56px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 0;
+  }
+  .section-note { font-size: 12.5px; color: var(--muted); max-width: 40ch; text-align: right; }
+
+  .tabs { display: flex; gap: 0; margin-bottom: 22px; border: 1px solid var(--line); width: fit-content; border-radius: 3px; overflow: hidden; }
+  .tab {
+    font-family: inherit;
+    font-size: 12.5px;
+    letter-spacing: 0.01em;
+    background: var(--surface);
+    color: var(--muted);
+    border: none;
+    padding: 9px 16px;
+    cursor: pointer;
+  }
+  .tab + .tab { border-left: 1px solid var(--line); }
+  .tab[aria-pressed="true"] { background: var(--teal); color: var(--bg); }
+  .tab:hover:not([aria-pressed="true"]) { color: var(--ink); }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 18px 8px;
+  }
+
+  svg text { font-family: 'IBM Plex Mono', monospace; fill: var(--ink); }
+  .bar-label { font-size: 12px; }
+  .bar-n { fill: var(--muted); }
+  .axis-line { stroke: var(--line); stroke-width: 1; }
+  .ref-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .whisker { stroke: var(--ink); stroke-width: 1.2; }
+  .bar-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 3px;
+    line-height: 1.5;
+    opacity: 0;
+    transition: opacity 0.1s;
+    z-index: 5;
+    white-space: nowrap;
+  }
+  .chart-wrap { position: relative; }
+
+  .legend { display:flex; gap:18px; flex-wrap:wrap; margin: 12px 2px 4px; font-size: 12px; color: var(--muted); }
+  .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .swatch { width:10px; height:10px; border-radius:2px; display:inline-block; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 10px;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  thead th:hover { color: var(--ink); }
+  thead th .arrow { font-size: 10px; opacity: 0.6; margin-left: 3px; }
+  tbody td { padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  tbody tr:nth-child(odd) { background: var(--row-alt); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .flag-yes { color: var(--amber); font-weight: 600; }
+  .flag-no { color: var(--muted); }
+  .venue-name { max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+
+  .note-box {
+    border-left: 3px solid var(--amber);
+    background: var(--amber-soft);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--ink);
+    border-radius: 0 3px 3px 0;
+  }
+  .note-box b { color: var(--amber); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  footer p { margin: 0 0 8px; }
+
+  @media (max-width: 560px) {
+    .hero-stats { grid-template-columns: 1fr; }
+    .hero-stat + .hero-stat { border-left: none; border-top: 1px solid var(--line); }
+    .section-note { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="kicker">IPL 2008-2026 &middot; TOSS &amp; VENUE STUDY</p>
+  <h1>Does winning the toss actually matter?</h1>
+  <p class="dek">1,184 completed IPL matches, ball-by-ball data rolled up to match level. The short answer: <b>barely, on its own</b>, but the decision the toss winner makes is a different story. Explore the venue-level breakdown below; the honest caveats are built in, not hidden in a footnote.</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-num teal" id="heroToss">51.7%</div>
+      <div class="hero-label">of the time, the toss winner also won the match</div>
+      <div class="hero-sub">n = 1,184 · p = 0.26 vs. a coin flip</div>
+      <span class="hero-tag flat">statistically a coin flip</span>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-num slate" id="heroBatFirst">45.9%</div>
+      <div class="hero-label">win rate when batting first, league-wide</div>
+      <div class="hero-sub">n = 1,184 · p = 0.005 vs. 50%</div>
+      <span class="hero-tag real">this one's real</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Venue ledger</h2>
+      <div class="section-note">Home venues only, min. 15 matches. Bars sorted high → low.</div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Metric">
+      <button class="tab" id="tabToss" aria-pressed="true" role="tab">Toss-winner win rate</button>
+      <button class="tab" id="tabBat" aria-pressed="false" role="tab">Batting-first win rate</button>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-wrap" id="chartWrap">
+        <svg id="venueChart" width="100%" viewBox="0 0 860 480" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="bar-tooltip" id="tooltip"></div>
+      </div>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--amber)"></span> p &lt; 0.05 (before correcting for 14 comparisons)</span>
+        <span><span class="swatch" style="background:var(--slate)"></span> not significant</span>
+        <span>Error bars = 95% Wilson confidence interval</span>
+      </div>
+    </div>
+
+    <div class="note-box" style="margin-top:16px;">
+      <b>Read this carefully:</b> at a 5% threshold, testing 14 venues independently predicts roughly <b>0.7 false positives by chance alone</b>. A league-wide test across all venues at once (χ² = 11.1, df = 13, p = 0.60) found <b>no significant venue effect overall</b>. Treat the one highlighted bar as a lead worth re-checking in a few more seasons, not a proven venue trend.
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Has this shifted over time?</h2>
+      <div class="section-note">Batting-first win rate vs. % of toss winners who chose to field, by season.</div>
+    </div>
+    <div class="chart-card">
+      <svg id="seasonChart" width="100%" viewBox="0 0 860 380" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--teal)"></span> batting-first win rate</span>
+        <span><span class="swatch" style="background:var(--amber)"></span> % of toss winners who chose to field</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Full ledger</h2>
+      <div class="section-note">Click a column to sort.</div>
+    </div>
+    <div class="chart-card" style="overflow-x:auto;">
+      <table id="ledgerTable">
+        <thead>
+          <tr>
+            <th data-key="venue">Venue</th>
+            <th class="num" data-key="n">N<span class="arrow"></span></th>
+            <th class="num" data-key="rate">Rate<span class="arrow"></span></th>
+            <th class="num" data-key="ci">95% CI</th>
+            <th class="num" data-key="p_value">p-value<span class="arrow"></span></th>
+            <th data-key="sig">Flag</th>
+          </tr>
+        </thead>
+        <tbody id="ledgerBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Data: Cricsheet-derived ball-by-ball IPL records, 2008-2026 seasons (1,184 matches after excluding 9 no-result games). Ties resolved to their super-over winner. Neutral-country venues (South Africa 2009, UAE 2014/2020/21) excluded from the venue breakdown.</p>
+    <p>This page accompanies a fuller exploratory notebook covering data cleaning, statistical tests, margin-of-victory cross-checks, and stated data limitations (no day/night field is recorded, so a dew-based explanation can't be tested directly).</p>
+  </footer>
+
+</div>
+
+<script>
+const DATA = {
+  overall: {"toss_win_rate":0.5169,"toss_win_n":1184,"toss_win_p":0.257,"bat_first_rate":0.4586,"bat_first_p":0.0048},
+  toss_win_by_venue: [
+    {"venue":"Ekana Cricket Stadium (Lucknow)","n":23,"rate":0.6957,"ci_lo":0.4913,"ci_hi":0.844,"p_value":0.0931,"sig":false},
+    {"venue":"Sawai Mansingh Stadium (Jaipur)","n":64,"rate":0.5625,"ci_lo":0.4409,"ci_hi":0.6771,"p_value":0.3817,"sig":false},
+    {"venue":"MCA Stadium (Pune)","n":51,"rate":0.549,"ci_lo":0.4138,"ci_hi":0.6773,"p_value":0.5758,"sig":false},
+    {"venue":"M Chinnaswamy Stadium (Bengaluru)","n":99,"rate":0.5455,"ci_lo":0.4475,"ci_hi":0.64,"p_value":0.4215,"sig":false},
+    {"venue":"Dr DY Patil Sports Academy (Mumbai)","n":37,"rate":0.5405,"ci_lo":0.3838,"ci_hi":0.6896,"p_value":0.7428,"sig":false},
+    {"venue":"Wankhede Stadium (Mumbai)","n":128,"rate":0.5312,"ci_lo":0.4452,"ci_hi":0.6155,"p_value":0.5363,"sig":false},
+    {"venue":"ACA-VDCA Stadium (Visakhapatnam)","n":17,"rate":0.5294,"ci_lo":0.3096,"ci_hi":0.7383,"p_value":1.0,"sig":false},
+    {"venue":"Brabourne Stadium (Mumbai)","n":27,"rate":0.5185,"ci_lo":0.3399,"ci_hi":0.6926,"p_value":1.0,"sig":false},
+    {"venue":"Eden Gardens (Kolkata)","n":101,"rate":0.5149,"ci_lo":0.4186,"ci_hi":0.61,"p_value":0.8424,"sig":false},
+    {"venue":"MA Chidambaram Stadium (Chennai)","n":94,"rate":0.5106,"ci_lo":0.4112,"ci_hi":0.6093,"p_value":0.9179,"sig":false},
+    {"venue":"Arun Jaitley Stadium (Delhi)","n":98,"rate":0.5102,"ci_lo":0.4127,"ci_hi":0.6069,"p_value":0.9196,"sig":false},
+    {"venue":"Narendra Modi Stadium (Ahmedabad)","n":46,"rate":0.4783,"ci_lo":0.3412,"ci_hi":0.6186,"p_value":0.883,"sig":false},
+    {"venue":"PCA Stadium (Mohali)","n":61,"rate":0.4754,"ci_lo":0.3553,"ci_hi":0.5984,"p_value":0.7982,"sig":false},
+    {"venue":"Rajiv Gandhi Intl Stadium (Hyderabad)","n":84,"rate":0.381,"ci_lo":0.2845,"ci_hi":0.4878,"p_value":0.0375,"sig":true}
+  ],
+  bat_first_by_venue: [
+    {"venue":"MA Chidambaram Stadium (Chennai)","n":94,"rate":0.5638,"ci_lo":0.463,"ci_hi":0.6596,"p_value":0.2564,"sig":false},
+    {"venue":"MCA Stadium (Pune)","n":51,"rate":0.549,"ci_lo":0.4138,"ci_hi":0.6773,"p_value":0.5758,"sig":false},
+    {"venue":"Brabourne Stadium (Mumbai)","n":27,"rate":0.5185,"ci_lo":0.3399,"ci_hi":0.6926,"p_value":1.0,"sig":false},
+    {"venue":"Narendra Modi Stadium (Ahmedabad)","n":46,"rate":0.5,"ci_lo":0.3612,"ci_hi":0.6388,"p_value":1.0,"sig":false},
+    {"venue":"Arun Jaitley Stadium (Delhi)","n":98,"rate":0.4898,"ci_lo":0.3931,"ci_hi":0.5873,"p_value":0.9196,"sig":false},
+    {"venue":"ACA-VDCA Stadium (Visakhapatnam)","n":17,"rate":0.4706,"ci_lo":0.2617,"ci_hi":0.6904,"p_value":1.0,"sig":false},
+    {"venue":"Dr DY Patil Sports Academy (Mumbai)","n":37,"rate":0.4595,"ci_lo":0.3104,"ci_hi":0.6162,"p_value":0.7428,"sig":false},
+    {"venue":"Wankhede Stadium (Mumbai)","n":128,"rate":0.4531,"ci_lo":0.3695,"ci_hi":0.5395,"p_value":0.3309,"sig":false},
+    {"venue":"M Chinnaswamy Stadium (Bengaluru)","n":99,"rate":0.4444,"ci_lo":0.3505,"ci_hi":0.5426,"p_value":0.3149,"sig":false},
+    {"venue":"PCA Stadium (Mohali)","n":61,"rate":0.4426,"ci_lo":0.3251,"ci_hi":0.567,"p_value":0.4426,"sig":false},
+    {"venue":"Rajiv Gandhi Intl Stadium (Hyderabad)","n":84,"rate":0.4286,"ci_lo":0.3282,"ci_hi":0.5352,"p_value":0.2299,"sig":false},
+    {"venue":"Eden Gardens (Kolkata)","n":101,"rate":0.4257,"ci_lo":0.3338,"ci_hi":0.5231,"p_value":0.1633,"sig":false},
+    {"venue":"Ekana Cricket Stadium (Lucknow)","n":23,"rate":0.3913,"ci_lo":0.2216,"ci_hi":0.5921,"p_value":0.4049,"sig":false},
+    {"venue":"Sawai Mansingh Stadium (Jaipur)","n":64,"rate":0.3594,"ci_lo":0.2529,"ci_hi":0.4818,"p_value":0.0328,"sig":true}
+  ],
+  season: [
+    {"season":"2007/08","n":58,"bat_first_win_rate":0.3793,"toss_win_rate":0.4828,"pct_chose_field":0.5517},
+    {"season":"2009","n":57,"bat_first_win_rate":0.4737,"toss_win_rate":0.5789,"pct_chose_field":0.386},
+    {"season":"2009/10","n":60,"bat_first_win_rate":0.5333,"toss_win_rate":0.5167,"pct_chose_field":0.35},
+    {"season":"2011","n":72,"bat_first_win_rate":0.4444,"toss_win_rate":0.5278,"pct_chose_field":0.6667},
+    {"season":"2012","n":74,"bat_first_win_rate":0.4595,"toss_win_rate":0.4459,"pct_chose_field":0.5},
+    {"season":"2013","n":76,"bat_first_win_rate":0.4868,"toss_win_rate":0.4737,"pct_chose_field":0.4079},
+    {"season":"2014","n":60,"bat_first_win_rate":0.3833,"toss_win_rate":0.5,"pct_chose_field":0.6833},
+    {"season":"2015","n":57,"bat_first_win_rate":0.5614,"toss_win_rate":0.4912,"pct_chose_field":0.5614},
+    {"season":"2016","n":60,"bat_first_win_rate":0.3167,"toss_win_rate":0.5667,"pct_chose_field":0.8167},
+    {"season":"2017","n":59,"bat_first_win_rate":0.4407,"toss_win_rate":0.5763,"pct_chose_field":0.8136},
+    {"season":"2018","n":60,"bat_first_win_rate":0.4667,"toss_win_rate":0.5333,"pct_chose_field":0.8333},
+    {"season":"2019","n":59,"bat_first_win_rate":0.3898,"toss_win_rate":0.6102,"pct_chose_field":0.8305},
+    {"season":"2020/21","n":60,"bat_first_win_rate":0.5,"toss_win_rate":0.4167,"pct_chose_field":0.55},
+    {"season":"2021","n":60,"bat_first_win_rate":0.3833,"toss_win_rate":0.5833,"pct_chose_field":0.7333},
+    {"season":"2022","n":74,"bat_first_win_rate":0.5,"toss_win_rate":0.4865,"pct_chose_field":0.7973},
+    {"season":"2023","n":73,"bat_first_win_rate":0.5479,"toss_win_rate":0.4658,"pct_chose_field":0.7123},
+    {"season":"2024","n":71,"bat_first_win_rate":0.493,"toss_win_rate":0.4366,"pct_chose_field":0.7324},
+    {"season":"2025","n":71,"bat_first_win_rate":0.4789,"toss_win_rate":0.6056,"pct_chose_field":0.831},
+    {"season":"2026","n":23,"bat_first_win_rate":0.3913,"toss_win_rate":0.6522,"pct_chose_field":0.9565}
+  ]
+};
+
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs) {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+}
+
+let currentMetric = 'toss';
+const tooltip = document.getElementById('tooltip');
+const chartWrap = document.getElementById('chartWrap');
+
+function drawVenueChart(metricKey) {
+  const svg = document.getElementById('venueChart');
+  svg.innerHTML = '';
+  const rows = [...DATA[metricKey]].sort((a,b) => b.rate - a.rate);
+
+  const W = 860, H = 480;
+  const marginL = 260, marginR = 30, marginT = 14, marginB = 34;
+  const plotW = W - marginL - marginR;
+  const plotH = H - marginT - marginB;
+  const barH = plotH / rows.length;
+  const x = (v) => marginL + (v) * plotW;
+
+  const teal = cssVar('--teal'), amber = cssVar('--amber'), slate = cssVar('--slate'),
+        line = cssVar('--line'), ink = cssVar('--ink'), muted = cssVar('--muted');
+
+  // gridlines + axis labels 0/25/50/75/100
+  [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+    const gx = x(v);
+    svg.appendChild(el('line', {x1:gx, x2:gx, y1:marginT, y2:marginT+plotH, class:'axis-line'}));
+    const t = el('text', {x:gx, y:marginT+plotH+18, 'text-anchor':'middle', class:'bar-n'});
+    t.textContent = Math.round(v*100) + '%';
+    t.setAttribute('font-size','11');
+    svg.appendChild(t);
+  });
+  // reference line at 50%
+  const refx = x(0.5);
+  svg.appendChild(el('line', {x1:refx, x2:refx, y1:marginT, y2:marginT+plotH, class:'ref-line'}));
+
+  rows.forEach((r, i) => {
+    const cy = marginT + i*barH + barH/2;
+    const bh = barH*0.5;
+    const color = r.sig ? amber : slate;
+
+    // venue label
+    const label = el('text', {x: marginL-12, y: cy+4, 'text-anchor':'end', class:'bar-label'});
+    label.textContent = r.venue.length > 34 ? r.venue.slice(0,33)+'…' : r.venue;
+    svg.appendChild(label);
+    const nlabel = el('text', {x: marginL-12, y: cy+17, 'text-anchor':'end', class:'bar-n'});
+    nlabel.setAttribute('font-size','10.5');
+    nlabel.textContent = 'n=' + r.n;
+    svg.appendChild(nlabel);
+
+    // whisker
+    svg.appendChild(el('line', {x1:x(r.ci_lo), x2:x(r.ci_hi), y1:cy, y2:cy, class:'whisker'}));
+    svg.appendChild(el('line', {x1:x(r.ci_lo), x2:x(r.ci_lo), y1:cy-4, y2:cy+4, class:'whisker'}));
+    svg.appendChild(el('line', {x1:x(r.ci_hi), x2:x(r.ci_hi), y1:cy-4, y2:cy+4, class:'whisker'}));
+
+    // bar
+    const bar = el('rect', {
+      x: marginL, y: cy-bh/2, width: Math.max(0,x(r.rate)-marginL), height: bh,
+      fill: color, rx: 1.5, style:'cursor:pointer;'
+    });
+    bar.addEventListener('mousemove', (ev) => {
+      tooltip.style.opacity = 1;
+      tooltip.innerHTML = `<b>${r.venue}</b><br>rate: ${(r.rate*100).toFixed(1)}% (n=${r.n})<br>95% CI: ${(r.ci_lo*100).toFixed(1)}-${(r.ci_hi*100).toFixed(1)}%<br>p = ${r.p_value.toFixed(3)} ${r.sig ? '(sig.)' : ''}`;
+      const rect = chartWrap.getBoundingClientRect();
+      tooltip.style.left = (ev.clientX - rect.left + 14) + 'px';
+      tooltip.style.top = (ev.clientY - rect.top - 10) + 'px';
+    });
+    bar.addEventListener('mouseleave', () => tooltip.style.opacity = 0);
+    svg.appendChild(bar);
+  });
+}
+
+function drawSeasonChart() {
+  const svg = document.getElementById('seasonChart');
+  svg.innerHTML = '';
+  const rows = DATA.season;
+  const W = 860, H = 380;
+  const marginL = 50, marginR = 20, marginT = 20, marginB = 70;
+  const plotW = W - marginL - marginR;
+  const plotH = H - marginT - marginB;
+
+  const teal = cssVar('--teal'), amber = cssVar('--amber'), line = cssVar('--line'), muted = cssVar('--muted');
+
+  const x = (i) => marginL + (i/(rows.length-1)) * plotW;
+  const y = (v) => marginT + (1 - (v-0.2)/(1.0-0.2)) * plotH; // scale 20%-100%
+
+  [0.2,0.4,0.6,0.8,1.0].forEach(v => {
+    const gy = y(v);
+    svg.appendChild(el('line', {x1:marginL, x2:marginL+plotW, y1:gy, y2:gy, class:'axis-line'}));
+    const t = el('text', {x:marginL-8, y:gy+4, 'text-anchor':'end', class:'bar-n'});
+    t.setAttribute('font-size','11');
+    t.textContent = Math.round(v*100)+'%';
+    svg.appendChild(t);
+  });
+  // 50% reference for bat-first line
+  const ref50 = y(0.5);
+  svg.appendChild(el('line', {x1:marginL, x2:marginL+plotW, y1:ref50, y2:ref50, class:'ref-line'}));
+
+  rows.forEach((r,i) => {
+    const t = el('text', {x:x(i), y:marginT+plotH+18, 'text-anchor':'end', class:'bar-n', transform:`rotate(-45 ${x(i)} ${marginT+plotH+18})`});
+    t.setAttribute('font-size','10.5');
+    t.textContent = r.season;
+    svg.appendChild(t);
+  });
+
+  function drawLine(key, color) {
+    let d = '';
+    rows.forEach((r,i) => {
+      const px = x(i), py = y(r[key]);
+      d += (i===0 ? 'M' : 'L') + px + ' ' + py + ' ';
+    });
+    svg.appendChild(el('path', {d, fill:'none', stroke:color, 'stroke-width':2}));
+    rows.forEach((r,i) => {
+      const c = el('circle', {cx:x(i), cy:y(r[key]), r:3.2, fill:color, style:'cursor:pointer;'});
+      c.addEventListener('mousemove', (ev) => {
+        tooltip.style.opacity = 1;
+        tooltip.innerHTML = `<b>${r.season}</b><br>batting-first win: ${(r.bat_first_win_rate*100).toFixed(1)}%<br>chose to field: ${(r.pct_chose_field*100).toFixed(1)}%<br>n=${r.n}`;
+        const rect = svg.getBoundingClientRect();
+        tooltip.style.left = (ev.clientX - rect.left + 14) + 'px';
+        tooltip.style.top = (ev.clientY - rect.top - 10) + 'px';
+      });
+      c.addEventListener('mouseleave', () => tooltip.style.opacity = 0);
+      svg.appendChild(c);
+    });
+  }
+  drawLine('bat_first_win_rate', teal);
+  drawLine('pct_chose_field', amber);
+}
+
+function renderTable(rows) {
+  const body = document.getElementById('ledgerBody');
+  body.innerHTML = '';
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="venue-name">${r.venue}</td>
+      <td class="num">${r.n}</td>
+      <td class="num">${(r.rate*100).toFixed(1)}%</td>
+      <td class="num">${(r.ci_lo*100).toFixed(1)}-${(r.ci_hi*100).toFixed(1)}%</td>
+      <td class="num">${r.p_value.toFixed(3)}</td>
+      <td class="${r.sig ? 'flag-yes' : 'flag-no'}">${r.sig ? 'p < 0.05' : '-'}</td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+let sortState = {key:'rate', dir:-1};
+function sortAndRender() {
+  const rows = [...DATA[currentMetric === 'toss' ? 'toss_win_by_venue' : 'bat_first_by_venue']];
+  const {key, dir} = sortState;
+  rows.sort((a,b) => {
+    let av = key==='ci' ? a.ci_lo : a[key], bv = key==='ci' ? b.ci_lo : b[key];
+    if (typeof av === 'string') return dir * av.localeCompare(bv);
+    return dir * (av - bv);
+  });
+  renderTable(rows);
+}
+
+document.querySelectorAll('#ledgerTable thead th').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (sortState.key === key) sortState.dir *= -1; else sortState = {key, dir: key==='venue' ? 1 : -1};
+    sortAndRender();
+  });
+});
+
+function setMetric(metric) {
+  currentMetric = metric;
+  document.getElementById('tabToss').setAttribute('aria-pressed', metric==='toss');
+  document.getElementById('tabBat').setAttribute('aria-pressed', metric==='bat');
+  drawVenueChart(metric === 'toss' ? 'toss_win_by_venue' : 'bat_first_by_venue');
+  sortAndRender();
+}
+document.getElementById('tabToss').addEventListener('click', () => setMetric('toss'));
+document.getElementById('tabBat').addEventListener('click', () => setMetric('bat'));
+
+// initial render
+setMetric('toss');
+drawSeasonChart();
+window.addEventListener('resize', () => {
+  drawVenueChart(currentMetric === 'toss' ? 'toss_win_by_venue' : 'bat_first_by_venue');
+  drawSeasonChart();
+});
+</script>
+</body>
+</html>
