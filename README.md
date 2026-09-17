@@ -63,15 +63,6 @@ pip install -r requirements.txt
 jupyter notebook IPL_Toss_Venue_EDA.ipynb
 ```
 
-## Hosting the interactive explorer on GitHub Pages
-
-`index.html` is fully self contained, no build step and no server needed.
-
-1. Push this repo to GitHub.
-2. In the repo settings, under Pages, set the source to the main branch, root folder.
-3. GitHub will publish it at `https://<your-username>.github.io/<repo-name>/`.
-4. Drop that link into this README and into your resume or portfolio.
-
 ## Tech
 
 Python, pandas, NumPy, SciPy (binomial tests, chi square), statsmodels (Wilson confidence intervals), Matplotlib, and a small hand built HTML and JavaScript page (SVG charts, no external charting library) for the interactive version.
